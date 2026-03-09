@@ -13,8 +13,8 @@ const role = localStorage.getItem("role")
 const logout = () => {
 
 localStorage.clear()
-
 navigate("/")
+window.location.reload()   // forces navbar update
 
 }
 
@@ -43,18 +43,14 @@ data-bs-target="#navbarNav"
 
 <ul className="navbar-nav me-auto">
 
-{/* CUSTOMER NAVBAR */}
+{/* CUSTOMER */}
 
 {!role && (
-
 <li className="nav-item">
-
 <Link className="nav-link" to="/">
 Home
 </Link>
-
 </li>
-
 )}
 
 {/* ADMIN NAVBAR */}
@@ -62,7 +58,6 @@ Home
 {role === "hotel_admin" && (
 
 <>
-
 <li className="nav-item">
 <Link className="nav-link" to="/admin">
 Dashboard
@@ -70,20 +65,20 @@ Dashboard
 </li>
 
 <li className="nav-item">
-<Link className="nav-link" to="/admin/menu">
-Menu
-</Link>
-</li>
-
-<li className="nav-item">
 <Link className="nav-link" to="/admin/add-category">
-Categories
+Add Category
 </Link>
 </li>
 
 <li className="nav-item">
-<Link className="nav-link" to="/admin/tables">
-Tables
+<Link className="nav-link" to="/admin/add-item">
+Add Menu Item
+</Link>
+</li>
+
+<li className="nav-item">
+<Link className="nav-link" to="/admin/menu">
+View Menu
 </Link>
 </li>
 
@@ -96,7 +91,6 @@ Tables
 {role === "super_admin" && (
 
 <>
-
 <li className="nav-item">
 <Link className="nav-link" to="/superadmin">
 Dashboard
@@ -111,10 +105,9 @@ Create Hotel
 
 <li className="nav-item">
 <Link className="nav-link" to="/superadmin/hotels">
-Hotels
+View Hotels
 </Link>
 </li>
-
 </>
 
 )}
@@ -122,18 +115,14 @@ Hotels
 {/* KITCHEN */}
 
 {role === "kitchen" && (
-
 <li className="nav-item">
 <Link className="nav-link" to="/kitchen">
 Kitchen Orders
 </Link>
 </li>
-
 )}
 
 </ul>
-
-{/* Right side buttons */}
 
 <div className="d-flex gap-2">
 
@@ -142,7 +131,6 @@ Kitchen Orders
 {!role && (
 
 <>
-
 <Link to="/admin-login" className="btn btn-outline-light">
 Admin Login
 </Link>
@@ -150,7 +138,6 @@ Admin Login
 <Link to="/superadmin-login" className="btn btn-warning">
 Super Admin
 </Link>
-
 </>
 
 )}
@@ -175,9 +162,7 @@ Logout
 {!role && (
 
 <Link to="/cart" className="btn btn-success">
-
 🛒 Cart ({cart.length})
-
 </Link>
 
 )}

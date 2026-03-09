@@ -20,10 +20,12 @@ password
 
 })
 
-localStorage.setItem("role",res.data.role)
+localStorage.setItem("token",res.data.token)
+localStorage.setItem("role",res.data.user.role)
 localStorage.setItem("hotelId",res.data.user.hotelId)
 
 navigate("/admin")
+window.location.reload()
 
 }
 
