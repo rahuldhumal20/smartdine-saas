@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 
 function AddMenuItem(){
@@ -6,18 +6,16 @@ function AddMenuItem(){
 const [name,setName] = useState("")
 const [price,setPrice] = useState("")
 const [categoryId,setCategoryId] = useState("")
+const [image,setImage] = useState("")
+
 const [categories,setCategories] = useState([])
 
 const hotelId = localStorage.getItem("hotelId")
 
 useEffect(()=>{
 
-const hotelId = localStorage.getItem("hotelId")
-
-axios
-.get(`http://localhost:5000/api/menu/categories/${hotelId}`)
-.then(res => setCategories(res.data))
-.catch(err => console.error(err))
+axios.get(`http://localhost:5000/api/menu/categories/${hotelId}`)
+.then(res=>setCategories(res.data))
 
 },[])
 
@@ -25,26 +23,25 @@ const submit = async (e)=>{
 
 e.preventDefault()
 
-const hotelId = localStorage.getItem("hotelId")
-
 await axios.post("http://localhost:5000/api/menu/item",{
 
-hotelId,
-categoryId,
 name,
-price
+price,
+categoryId,
+image,
+hotelId
 
 })
 
-alert("Item added")
+alert("Menu item added")
 
 }
 
 return(
 
-<div>
+<div className="container">
 
-<h2>Add Menu Item</h2>
+<h3 className="mb-4">Add Menu Item</h3>
 
 <form onSubmit={submit}>
 
@@ -64,20 +61,26 @@ onChange={(e)=>setPrice(e.target.value)}
 
 <select
 className="form-control mb-3"
+value={categoryId}
 onChange={(e)=>setCategoryId(e.target.value)}
 >
 
 <option>Select Category</option>
 
 {categories.map(cat=>(
-
 <option key={cat._id} value={cat._id}>
 {cat.name}
 </option>
-
 ))}
 
 </select>
+
+<input
+className="form-control mb-3"
+placeholder="Image URL"
+value={image}
+onChange={(e)=>setImage(e.target.value)}
+/>
 
 <button className="btn btn-success">
 Add Item

@@ -2,49 +2,35 @@ const mongoose = require("mongoose")
 
 const menuItemSchema = new mongoose.Schema({
 
-  hotelId:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref:"Hotel"
-  },
+name:{
+type:String,
+required:true
+},
 
-  categoryId:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref:"Category"
-  },
+price:{
+type:Number,
+required:true
+},
 
-  name:{
-    type:String,
-    required:true
-  },
+categoryId:{
+type:mongoose.Schema.Types.ObjectId,
+ref:"Category"
+},
 
-  description:String,
+hotelId:{
+type:mongoose.Schema.Types.ObjectId,
+ref:"Hotel"
+},
 
-  price:{
-    type:Number,
-    required:true
-  },
+image:{
+type:String,
+default:"https://via.placeholder.com/300"
+},
 
-  image:String,
-
-  isVeg:{
-    type:Boolean,
-    default:true
-  },
-
-  available:{
-    type:Boolean,
-    default:true
-  },
-
-  rating:{
-    type:Number,
-    default:0
-  },
-
-  createdAt:{
-    type:Date,
-    default:Date.now
-  }
+createdAt:{
+type:Date,
+default:Date.now
+}
 
 })
 
